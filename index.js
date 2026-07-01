@@ -1,17 +1,21 @@
 import express from 'express';
 import path from "path";
-const app = express()
-import { Collection, MongoClient } from "mongodb";
-import { connect } from 'http2';
-import { log } from 'console';
-const publicpath = path.resolve('public')
-app.use(express.static(publicpath))
+import dotenv from "dotenv";
+import { MongoClient } from "mongodb";
+
+dotenv.config();
+
+const app = express();
+const Port = process.env.PORT || 3200;
+const publicpath = path.resolve("public");
+app.use(express.static(publicpath));
 
 const dbname = "Alchol";
 const collectionname = "Shopkipper";
-const collectionname2 = "Customer"
-const collectionname3 = "List"
-const url = "mongodb://localhost:27017";
+const collectionname2 = "Customer";
+const collectionname3 = "List";
+
+const url = process.env.MONGO_URL;
 const client = new MongoClient(url);
 
 const connection = async () => {
@@ -127,6 +131,6 @@ app.get("/List",async(req,resp)=>{
     
 })
 
-app.listen(3200, () => {
+app.listen(Port, () => {
     console.log("Server running on port 3200");
 });
