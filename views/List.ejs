@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Alchol all  list is here</h1>
+      <table border="2">
+          
+        <tr><th>Adhar card</th>
+           <th>Brand Name</th>
+           <th>Price</th>
+           <th>Date</th>
+           <th>Time</th>
+</tr>
+ 
+<% data.forEach((data)=>{%>
+           <tr>
+            <td><%=data.customer_Adhar_card_no%></td>
+            <td><%=data.brand_name%></td>
+            <td><%=data.brand_price%></td>
+            <td><%=data.date%></td>
+            <td><%=data.time%></td>
+        </tr>
+        <%})%>
+         
+      </table>
+      
+</body>
+</html>
