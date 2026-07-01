@@ -24,7 +24,7 @@ const connection = async () => {
 }
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs")
-app.get("/firstpage", (req, resp) => {
+app.get("/", (req, resp) => {
     resp.render("Shopkipper-registerpage")
 })
 app.get("/secondpage", (req, resp) => {
@@ -45,7 +45,7 @@ app.get("/brand", (req, resp) => {
         aadhar: ""
     });
 });
-app.post("/firstpage", async (req, resp) => {
+app.post("/", async (req, resp) => {
     const db = await connection();
     const collection = db.collection(collectionname);
     await collection.insertOne(req.body);
@@ -53,7 +53,7 @@ app.post("/firstpage", async (req, resp) => {
     console.log(data);
     resp.redirect("/secondpage");
 });
-app.post("/firstpage", async (req, resp) => {
+app.post("/", async (req, resp) => {
     const db = await connection();
     const collection = db.collection(collectionname);
     const result = await collection.insertOne(req.body)
