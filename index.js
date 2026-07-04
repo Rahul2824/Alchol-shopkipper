@@ -6,7 +6,7 @@ import { MongoClient } from "mongodb";
 dotenv.config();
 
 const app = express();
-const Port = process.env.PORT || 3200;
+const PORT = process.env.PORT || 3200;
 const publicpath = path.resolve("public");
 app.use(express.static(publicpath));
 
@@ -17,11 +17,17 @@ const collectionname3 = "List";
 
 const url = process.env.MONGO_URL;
 const client = new MongoClient(url);
-
 const connection = async () => {
-    const connect = await client.connect();
-    return await connect.db(dbname)
-}
+    try {
+        const connect = await client.connect();
+        console.log("✅ MongoDB Atlas Connected Successfully");
+        return connect.db(dbname);
+    } catch (err) {
+        console.log("❌ MongoDB Connection Failed");
+        console.error(err);
+        throw err;
+    }
+};
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs")
 app.get("/", (req, resp) => {
@@ -130,7 +136,15 @@ app.get("/List",async(req,resp)=>{
     resp.render("List",{data})
     
 })
-
-app.listen(Port, () => {
+app.get("/test", async (req, res) => {
+    try {
+        const db = await connection();
+        await db.command({ ping: 1 });
+        res.send("✅ MongoDB Connected");
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+app.listen(PORT, () => {
     console.log("Server running on port 3200");
 });

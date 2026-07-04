@@ -3,17 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      *{
+        margin: 0px;
+        padding: 0px;
+        background-color: gray;
+      }
+      body{
+           min-height:100vh;
+   display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 33px;
+      }
+      .container{
+          width: 95%;
+          max-width: 1200px;
+           background:#fff;
+          padding: 30px;
+           box-shadow:0 10px 30px rgba(0,0,0,0.3);
+      }
+        h1{
+            text-align:center;
+            color:#333;
+            margin-bottom:25px;
+            font-size:35px;
+        }
+        table{
+           width:100%;
+            border-collapse:collapse;
+            overflow:hidden;
+            border-radius:10px; 
+        }
+         td{
+       
+            text-align:center;
+            font-size:16px;
+        }
+         th,td{
+                padding:10px;
+            }
+          
+    </style>
     <title>Document</title>
 </head>
 <body>
+  
+  <div class="container">
     <h1>Alchol all  list is here</h1>
       <table border="2">
-          
         <tr><th>Adhar card</th>
            <th>Brand Name</th>
            <th>Price</th>
            <th>Date</th>
            <th>Time</th>
+           <th>timer</th>
 </tr>
  
 <% data.forEach((data)=>{%>
@@ -23,10 +67,11 @@
             <td><%=data.brand_price%></td>
             <td><%=data.date%></td>
             <td><%=data.time%></td>
+            <td></td>
         </tr>
         <%})%>
          
       </table>
-      
+      </div>
 </body>
 </html>
