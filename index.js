@@ -124,6 +124,8 @@ app.post("/brand", async (req, resp) => {
     const db = await connection();
     const collection = db.collection(collectionname3);
 
+    req.body.purchaseDate = new Date();   // <-- हे Add कर
+
     await collection.insertOne(req.body);
 
     resp.redirect("/List");

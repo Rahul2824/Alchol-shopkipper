@@ -29,9 +29,47 @@
             <br><br>
             <input type="time" class="input1" name="time" placeholder="Enter Today time" id="value" required>
             <br><br>
-
-            <button class="button">Save</button>
+           
+            <button class="button" id="buyBtn">Save</button>
+             <h2 id="timer"></h2>
         </form>
+
+
+<script>
+
+const btn = document.getElementById("buyBtn");
+const timer = document.getElementById("timer");
+
+let interval;
+
+btn.addEventListener("click", function () {
+
+    let time = 168 * 60 * 60; // 7 Days
+
+    clearInterval(interval); // पुन्हा क्लिक केल्यास जुना timer बंद
+
+    interval = setInterval(() => {
+
+        let hours = Math.floor(time / 3600);
+        let minutes = Math.floor((time % 3600) / 60);
+        let seconds = time % 60;
+
+        timer.innerHTML =
+        `${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+
+        if (time <= 0) {
+            clearInterval(interval);
+            timer.innerHTML = "Time Over";
+            return;
+        }
+
+        time--;
+
+    }, 1000);
+
+});
+
+</script>
     </div>
 </body>
 

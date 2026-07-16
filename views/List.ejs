@@ -67,11 +67,60 @@
             <td><%=data.brand_price%></td>
             <td><%=data.date%></td>
             <td><%=data.time%></td>
-            <td></td>
-        </tr>
+            <td id="timer-<%= data._id %>"></td>        
+          </tr>
         <%})%>
          
       </table>
+      
       </div>
+      <script>
+
+<% data.forEach(function(item){ %>
+
+(function(){
+
+    const timer = document.getElementById("timer-<%= item._id %>");
+
+    const purchaseDate = new Date("<%= item.purchaseDate %>").getTime();
+
+    const endTime = purchaseDate + (7 * 24 * 60 * 60 * 1000);
+
+    const interval = setInterval(function(){
+
+        const now = Date.now();
+
+        const distance = endTime - now;
+
+        if(distance <= 0){
+
+            timer.innerHTML = "Finished";
+
+            clearInterval(interval);
+
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        timer.innerHTML =
+        days + "D " +
+        hours + "H " +
+        minutes + "M " +
+        seconds + "S";
+
+    },1000);
+
+})();
+
+<% }); %>
+
+</script>
 </body>
 </html>
