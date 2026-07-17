@@ -12,9 +12,10 @@
 
     <div class="dev-bar">
 
-        <h1>Register</h1>
-        <h1>Logine</h1>
-        <h1>list</h1>
+      <h1 class="Register" onclick="window.location.href='/thirdpage'">Register</h1>  
+      <h1 class="Logine" onclick="window.location.href='/fourthpage'">Logine</h1>
+      <h1 class="List" onclick="window.location.href='/List'">List</h1>
+   
     </div>
     <div class="form">
         <h1>Customer Shopping page</h1>
@@ -31,43 +32,49 @@
             <br><br>
            
             <button class="button" id="buyBtn">Save</button>
-             <h2 id="timer"></h2>
+             <h2 id="timer" class="timer"></h2>
         </form>
-
 
 <script>
 
 const btn = document.getElementById("buyBtn");
 const timer = document.getElementById("timer");
 
-let interval;
+<% if(lastPurchase){ %>
 
-btn.addEventListener("click", function () {
+const purchaseDate = new Date("<%= lastPurchase.purchaseDate %>").getTime();
+const endTime = purchaseDate + (7 * 24 * 60 * 60 * 1000);
 
-    let time = 168 * 60 * 60; // 7 Days
+function updateTimer(){
 
-    clearInterval(interval); // पुन्हा क्लिक केल्यास जुना timer बंद
+    const diff = endTime - Date.now();
 
-    interval = setInterval(() => {
+    if(diff <= 0){
+        timer.innerHTML = "✅ Purchase Allowed";
+        btn.disabled = false;
+        return;
+    }
 
-        let hours = Math.floor(time / 3600);
-        let minutes = Math.floor((time % 3600) / 60);
-        let seconds = time % 60;
+    btn.disabled = true;
 
-        timer.innerHTML =
-        `${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((diff%(1000*60))/1000);
 
-        if (time <= 0) {
-            clearInterval(interval);
-            timer.innerHTML = "Time Over";
-            return;
-        }
+    timer.innerHTML =
+    `Next Purchase after : ${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-        time--;
+}
 
-    }, 1000);
+updateTimer();
+setInterval(updateTimer,1000);
 
-});
+<% } else { %>
+
+timer.innerHTML = "✅ First Purchase Allowed";
+
+<% } %>
 
 </script>
     </div>

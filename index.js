@@ -38,6 +38,11 @@ app.get("/secondpage", (req, resp) => {
     resp.render("Shopkipper-loginepage")
 })
 
+app.get("/intro", (req, resp) => {
+
+    resp.render("intro")
+})
+
 
 
 app.get("/thirdpage", (req, resp) => {
@@ -48,7 +53,8 @@ app.get("/fourthpage", (req, resp) => {
 })
 app.get("/brand", (req, resp) => {
     resp.render("brand", {
-        aadhar: ""
+        aadhar: "",
+         lastPurchase: null
     });
 });
 app.post("/", async (req, resp) => {
@@ -98,27 +104,31 @@ app.post("/thirdpage", async (req, resp) => {
     resp.redirect("/fourthpage")
 })
 app.post("/fourthpage", async (req, resp) => {
- 
-    const db = await connection(); 
 
-    const collection = db.collection(collectionname2);
+    const db = await connection();
 
-    const user = await collection.findOne({
+    const customerCollection = db.collection(collectionname2);
+    const listCollection = db.collection(collectionname3);
+
+    const user = await customerCollection.findOne({
         customer_Adhar_card_no: req.body.customer_Adhar_card_no,
         customer_password: req.body.customer_password
     });
-if (user) {
-    return resp.render("brand", {
-        aadhar: user.customer_Adhar_card_no
-    });
-}
 
-    resp.send(`
-    <script>
-        alert("Username or Password is not Registered");
-        window.location.href="/fourthpage";
-    </script>`);
+    if (user) {
 
+        const lastPurchase = await listCollection.findOne(
+            { customer_Adhar_card_no: user.customer_Adhar_card_no },
+            { sort: { purchaseDate: -1 } }
+        );
+
+        return resp.render("brand", {
+            aadhar: user.customer_Adhar_card_no,
+            lastPurchase: lastPurchase
+        });
+    }
+
+    resp.send("Login Failed");
 });
 app.post("/brand", async (req, resp) => {
     const db = await connection();
