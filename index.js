@@ -18,29 +18,23 @@ const collectionname3 = "List";
 const url = process.env.MONGO_URL;
 const client = new MongoClient(url);
 const connection = async () => {
-    try {
-        const connect = await client.connect();
-        console.log("✅ MongoDB Atlas Connected Successfully");
+   
+        const connect = await client.connect()
         return connect.db(dbname);
-    } catch (err) {
-        console.log("❌ MongoDB Connection Failed");
-        console.error(err);
-        throw err;
-    }
 };
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs")
 app.get("/", (req, resp) => {
-    resp.render("Shopkipper-registerpage")
+    resp.render("intro")
 })
 app.get("/secondpage", (req, resp) => {
 
     resp.render("Shopkipper-loginepage")
 })
 
-app.get("/intro", (req, resp) => {
+app.get("/Shopkipper-registerpage", (req, resp) => {
 
-    resp.render("intro")
+    resp.render("Shopkipper-registerpage")
 })
 
 
