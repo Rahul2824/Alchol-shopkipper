@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-   
+       <div class="fullpage">
+
     <div class="dev-bar">
 
       <h1 class="Register" onclick="window.location.href='/thirdpage'">Register</h1>  
       <h1 class="Logine" onclick="window.location.href='/fourthpage'">Logine</h1>
       <h1 class="List" onclick="window.location.href='/List'">List</h1>
-   
     </div>
     <div class="form">
-         <h1>Customer register page</h1>
     <form action="/thirdpage" class="to-do-form" method="post">
+        <h1>Customer register page</h1>
         <input type="text" class="input1" name="customer_name" placeholder="Enter Customer Name" required>
         <br><br>
         <input type="number" class="input1" name="customer_Adhar_card_no" placeholder="Enter Adhar card no" required>
@@ -26,10 +26,10 @@
         <br><br>
         <input type="password" class="input1" name="customer_password"  placeholder="Enter Password" id="value" required>
         <br><br>
-        <button class="button">Register</button>
+        <button class="Register-button">Register</button>
         
         <h4 style="padding-left: 46%; font-size: small;">OR</h3>
-        <button class="button" onclick="window.location.href='/fourthpage'">logine</button>
-    </form></div>
+        <button class="logine-button" onclick="window.location.href='/fourthpage'">logine</button>
+    </form></div></div>
 </body>
 </html>

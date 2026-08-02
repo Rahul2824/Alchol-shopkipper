@@ -37,8 +37,6 @@ app.get("/Shopkipper-registerpage", (req, resp) => {
     resp.render("Shopkipper-registerpage")
 })
 
-
-
 app.get("/thirdpage", (req, resp) => {
     resp.render("customer-register")
 })
@@ -128,7 +126,7 @@ app.post("/brand", async (req, resp) => {
     const db = await connection();
     const collection = db.collection(collectionname3);
 
-    req.body.purchaseDate = new Date();   // <-- हे Add कर
+    req.body.purchaseDate = new Date();   
 
     await collection.insertOne(req.body);
 

@@ -1,84 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      *{
-        margin: 0px;
-        padding: 0px;
-        background-color: gray;
-      }
-      body{
-           min-height:100vh;
-   display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 33px;
-      }
-      .container{
-          width: 95%;
-          max-width: 1200px;
-           background:#fff;
-          padding: 30px;
-           box-shadow:0 10px 30px rgba(0,0,0,0.3);
-      }
-        h1{
-            text-align:center;
-            color:#333;
-            margin-bottom:25px;
-            font-size:35px;
-        }
-        table{
-           width:100%;
-            border-collapse:collapse;
-            overflow:hidden;
-            border-radius:10px; 
-        }
-         td{
-       
-            text-align:center;
-            font-size:16px;
-        }
-         th,td{
-                padding:10px;
-            }
-          
-    </style>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background:#eef5ff;
+}
+    .container {
+       width:95%;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    overflow-x:auto;
+    }
+
+    .nav {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      height: 20mm;
+      position: sticky;
+      display: flex;
+      align-items: center;
+      padding-left: 10mm;
+      font-size: 10mm;
+      color: white;
+    }
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+}
+
+
+/* Body */
+
+tbody td{
+    padding:16px;
+    border-bottom:1px solid #ddd;
+    font-size:17px;
+}
+tbody th{
+background-color: rgb(80, 21, 217);
+height:13mm ;
+}
+tbody tr:nth-child(even){
+    background:#f7fbff;
+}
+
+tbody tr:hover{
+    background:#dbeafe;
+    transition:.3s;
+}
+@media(max-width:768px){
+
+h1{
+    font-size:30px;
+}
+
+thead th,
+tbody td{
+    padding:10px;
+    font-size:14px;
+}
+
+}
+  </style>
+  <title>Document</title>
 </head>
+
 <body>
-  
+  <h1 class="nav">Alchol all list is here</h1>
   <div class="container">
-    <h1>Alchol all  list is here</h1>
-      <table border="2">
-        <tr><th>Adhar card</th>
-           <th>Brand Name</th>
-           <th>Price</th>
-           <th>Date</th>
-           <th>Time</th>
-           <th>timer</th>
-</tr>
- 
-<% data.forEach((data)=>{%>
-           <tr>
-            <td><%=data.customer_Adhar_card_no%></td>
-            <td><%=data.brand_name%></td>
-            <td><%=data.brand_price%></td>
-            <td><%=data.date%></td>
-            <td><%=data.time%></td>
-            <td id="timer-<%= data._id %>"></td>        
-          </tr>
+
+    <table border="2">
+      <tr>
+        <th>Adhar card</th>
+        <th>Brand Name</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>timer</th>
+      </tr>
+
+      <% data.forEach((data)=>{%>
+        <tr>
+          <td>
+            <%=data.customer_Adhar_card_no%>
+          </td>
+          <td>
+            <%=data.brand_name%>
+          </td>
+          <td>
+            <%=data.brand_price%>
+          </td>
+          <td>
+            <%=data.date%>
+          </td>
+          <td>
+            <%=data.time%>
+          </td>
+          <td id="timer-<%= data._id %>"></td>
+        </tr>
         <%})%>
-         
-      </table>
-      
-      </div>
-      <script>
 
-<% data.forEach(function(item){ %>
+    </table>
 
-(function(){
+  </div>
+  <script>
+
+<% data.forEach(function (item) { %>
+
+  (function () {
 
     const timer = document.getElementById("timer-<%= item._id %>");
 
@@ -86,41 +128,42 @@
 
     const endTime = purchaseDate + (7 * 24 * 60 * 60 * 1000);
 
-    const interval = setInterval(function(){
+    const interval = setInterval(function () {
 
-        const now = Date.now();
+      const now = Date.now();
 
-        const distance = endTime - now;
+      const distance = endTime - now;
 
-        if(distance <= 0){
+      if (distance <= 0) {
 
-            timer.innerHTML = "Finished";
+        timer.innerHTML = "Finished";
 
-            clearInterval(interval);
+        clearInterval(interval);
 
-            return;
-        }
+        return;
+      }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        timer.innerHTML =
+      timer.innerHTML =
         days + "D " +
         hours + "H " +
         minutes + "M " +
         seconds + "S";
 
-    },1000);
+    }, 1000);
 
-})();
+  })();
 
 <% }); %>
 
-</script>
+  </script>
 </body>
+
 </html>

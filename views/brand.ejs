@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<div class="fullpage">
     <div class="dev-bar">
 
       <h1 class="Register" onclick="window.location.href='/thirdpage'">Register</h1>  
@@ -18,8 +18,9 @@
    
     </div>
     <div class="form">
-        <h1>Customer Shopping page</h1>
+        
         <form action="/brand" class="to-do-form" method="post">
+            <h1>Customer Shopping page</h1><br><br>
             <input type="text" name="customer_Adhar_card_no" value="<%= aadhar %>" class="input1" readonly>
             <br><br>
             <input type="text" class="input1" name="brand_name" placeholder="Enter Brand Name" required>
@@ -31,10 +32,10 @@
             <input type="time" class="input1" name="time" placeholder="Enter Today time" id="value" required>
             <br><br>
            
-            <button class="button" id="buyBtn">Save</button>
+            <button class="logine-button" id="buyBtn">Save</button>
              <h2 id="timer" class="timer"></h2>
         </form>
-
+</div>
 <script>
 
 const btn = document.getElementById("buyBtn");
