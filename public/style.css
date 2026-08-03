@@ -116,12 +116,14 @@ body {
     align-items: center;
     padding-left: 10mm;
     padding-right: 10mm;
-    background-color: rgb(185, 181, 181);
+    background-color: rgb(4, 8, 83);
     border-radius: 3mm;
+    color: #d3d3d3;
 }
 
 .intro-box {
     padding-left: 25%;
+    padding-top: 30mm;
 }
 
 .startbutton {
@@ -130,17 +132,24 @@ body {
     border-radius: 4mm;
     margin-top: 10mm;
     margin-left: 30%;
-    background-color: gray;
+    background-color: rgb(20, 242, 98);
     cursor: pointer;
     margin-block-end: 20mm;
+    font-size: larger;
+    color: white;
+    font-weight: 100;
 }
 
-.fullpage {
+.fullpage{
     background: linear-gradient(135deg, #0f172a, #1d4ed8);
-    padding-bottom: 29mm;
+    padding-bottom: 10mm;
+height: 350mm;
 
 }
-
+.fullpage1{
+        background: linear-gradient(135deg, #0f172a, #1d4ed8);
+         height: 300mm;
+}
 .dev-bar h1:hover {
     color: blue;
 
