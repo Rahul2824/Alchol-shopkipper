@@ -110,18 +110,6 @@ body {
     cursor: pointer;
 }
 
-.intro {
-    height: 60%;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 10mm;
-    padding-right: 10mm;
-    background-color: rgb(4, 8, 83);
-    border-radius: 3mm;
-    color: #d3d3d3;
-}
 
 .intro-box {
     padding-left: 25%;
